@@ -1,4 +1,4 @@
-"""Setup script for ER Triage Workflow package."""
+"""Setup script for ER Admission Agentic AI package."""
 
 from setuptools import setup, find_packages
 
@@ -9,14 +9,14 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="er-triage-workflow",
+    name="er-admission-agentic-ai",
     version="1.0.0",
     author="Your Name",
     author_email="your.email@example.com",
-    description="A LangGraph-based workflow system for Emergency Room triage decision-making",
+    description="An agentic AI system for Emergency Room admission decision-making",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/er-triage-workflow",
+    url="https://github.com/yourusername/er-admission-agentic-ai",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",

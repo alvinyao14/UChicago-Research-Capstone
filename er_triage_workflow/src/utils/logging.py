@@ -1,4 +1,4 @@
-"""Logging utilities for ER Triage Workflow."""
+"""Logging utilities for ER Admission Agentic AI."""
 
 import json
 import os

@@ -1,4 +1,4 @@
-"""Configuration settings for ER Triage Workflow."""
+"""Configuration settings for ER Admission Agentic AI."""
 
 import os
 from pathlib import Path
@@ -8,7 +8,7 @@ from typing import Optional
 
 @dataclass
 class Config:
-    """Configuration class for ER Triage Workflow."""
+    """Configuration class for ER Admission Agentic AI."""
     
     # Base paths
     base_path: Path

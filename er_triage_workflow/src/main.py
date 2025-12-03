@@ -1,4 +1,4 @@
-"""Main entry point for ER Triage Workflow."""
+"""Main entry point for ER Admission Agentic AI."""
 
 import time
 from datetime import datetime
@@ -116,7 +116,7 @@ def run_simulation(visit_id: int, human_prompt: str, thread_id: Optional[str] = 
 
 def main():
     """Example main function demonstrating workflow usage."""
-    print("ER Triage LangGraph Workflow")
+    print("ER Admission Agentic AI")
     print("=" * 60)
     
     # Example 1: High-Risk Patient Note

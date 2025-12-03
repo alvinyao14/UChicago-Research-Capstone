@@ -1,6 +1,6 @@
-# ER Triage LangGraph Workflow
+# ER Admission Agentic AI
 
-A comprehensive LangGraph-based workflow for Emergency Room (ER) triage admission decisions, integrating traditional Machine Learning models, Large Language Model (LLM) classifiers, and a fusion agent with human-in-the-loop (HITL) capabilities.
+An agentic AI system for Emergency Room (ER) admission decision-making, integrating traditional Machine Learning models, Large Language Model (LLM) classifiers, and a fusion agent with human-in-the-loop (HITL) capabilities. Built with LangGraph for orchestration and reasoning.
 
 ## Repository Structure
 
@@ -13,9 +13,9 @@ Capstone_Organized/
 ├── 3-Model_Training/               # Model training artifacts
 │   ├── 3.1-Traditional_ML/
 │   │   └── 3.1.0-Traditional_ML_Artifacts/
-│   │       ├── gb_model.joblib          # Not in repo (too large)
-│   │       ├── ml_preprocessor.joblib   # Not in repo (too large)
-│   │       └── ml_feature_columns.json  # Included
+│   │       ├── gb_model.joblib       
+│   │       ├── ml_preprocessor.joblib
+│   │       └── ml_feature_columns.json
 │   └── 3.2-LLM_Classification/
 │       └── 3.2.0-FineTune_OpenBioLLM/
 │           └── OpenBioLLM_Final/        # Not in repo (too large)

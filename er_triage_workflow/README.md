@@ -1,6 +1,6 @@
-# ER Triage Workflow
+# ER Admission Agentic AI
 
-A LangGraph-based workflow system for Emergency Room triage decision-making that combines traditional ML models, LLM classifiers, and human-in-the-loop feedback.
+An agentic AI system for Emergency Room admission decision-making that combines traditional ML models, LLM classifiers, and human-in-the-loop feedback. Built with LangGraph for orchestration and reasoning.
 
 ## 📁 Project Structure
 
