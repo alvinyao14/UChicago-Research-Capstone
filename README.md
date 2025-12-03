@@ -1,111 +1,150 @@
-# Emergency Department Admission Prediction System
+# ER Triage LangGraph Workflow
 
-A comprehensive machine learning and LLM-based system for predicting patient admission decisions in emergency departments using a multi-model fusion approach with LangGraph workflow orchestration.
+A comprehensive LangGraph-based workflow for Emergency Room (ER) triage admission decisions, integrating traditional Machine Learning models, Large Language Model (LLM) classifiers, and a fusion agent with human-in-the-loop (HITL) capabilities.
 
-## Project Overview
-
-This project implements a hybrid decision-making system that combines:
-- **Traditional ML Model**: Gradient Boosting Classifier for admission probability prediction
-- **LLM Classifier**: Fine-tuned OpenBioLLM model for clinical text classification
-- **Fusion Agent**: LLM-based reasoning agent that synthesizes multiple signals
-- **LangGraph Workflow**: State-based workflow orchestration with human-in-the-loop capabilities
-
-## Project Structure
+## 📁 Repository Structure
 
 ```
 Capstone_Organized/
-├── 1-Data/                          # Training datasets and simulation database
-├── 2-PreWorkflow_Dataset_Prep/      # Data preprocessing and blending notebooks
-├── 3-Model_Training/                 # Model training pipelines
-│   ├── 3.1-Traditional_ML/          # Traditional ML model training
-│   └── 3.2-LLM_Classification/      # LLM fine-tuning and classification
-├── 4-LangGraph/                      # LangGraph workflow implementation
-└── 5-Evaluation_Reports/            # Model performance evaluation results
+├── 1-Data/                          # Data files
+│   ├── ED_Simulated_Database_Fixed.db
+│   └── ED_Model_Training_Dataset.csv
+├── 2-PreWorkflow_Dataset_Prep/     # Data preparation notebooks
+├── 3-Model_Training/               # Model training artifacts
+│   ├── 3.1-Traditional_ML/
+│   │   └── 3.1.0-Traditional_ML_Artifacts/
+│   │       ├── gb_model.joblib          # ⚠️ Not in repo (too large)
+│   │       ├── ml_preprocessor.joblib   # ⚠️ Not in repo (too large)
+│   │       └── ml_feature_columns.json  # ✅ Included
+│   └── 3.2-LLM_Classification/
+│       └── 3.2.0-FineTune_OpenBioLLM/
+│           └── OpenBioLLM_Final/        # ⚠️ Not in repo (too large)
+├── 4-LangGraph/                    # LangGraph workflow notebooks
+│   ├── 4.0-LangGraph_Logs/        # Execution logs
+│   └── 4.1.4-LangGraph_Agent_with_Reasoning-Optimal_Threshold_Finder.ipynb
+├── 5-Evaluation_Reports/          # Evaluation results
+└── er_triage_workflow/             # ✅ Python package (main code)
+    ├── config/                     # Configuration
+    ├── src/                        # Source code
+    │   ├── database/              # Database queries
+    │   ├── models/                # Model loading & inference
+    │   ├── utils/                 # Utilities
+    │   ├── workflow/              # LangGraph workflow
+    │   └── main.py                # Entry point
+    ├── tests/                      # Unit tests
+    ├── scripts/                    # Utility scripts
+    └── requirements.txt           # Dependencies
 ```
 
-## Key Features
-
-- **Multi-Model Fusion**: Combines ML and LLM predictions with clinical reasoning
-- **Severity Gate**: Early detection of critical cases requiring immediate admission
-- **Confidence-Based Routing**: Automatic routing to human review for low-confidence cases
-- **Human-in-the-Loop (HITL)**: Manual override capability for edge cases
-- **Comprehensive Logging**: Execution tracking and performance monitoring
-- **Optimal Threshold Finding**: Data-driven threshold optimization for admission decisions
-
-## Technologies Used
-
-- **Machine Learning**: scikit-learn, XGBoost
-- **LLM**: Hugging Face Transformers, PEFT (Parameter-Efficient Fine-Tuning)
-- **Workflow Orchestration**: LangGraph, LangChain
-- **Data Processing**: pandas, numpy
-- **Model Evaluation**: scikit-learn metrics
-
-## Setup
+## 🚀 Quick Start
 
 ### Prerequisites
 
+1. **Python 3.9+**
+2. **Model Artifacts**: You need to obtain the trained models separately (they're too large for Git):
+   - ML Model: `3-Model_Training/3.1-Traditional_ML/3.1.0-Traditional_ML_Artifacts/gb_model.joblib`
+   - ML Preprocessor: `3-Model_Training/3.1-Traditional_ML/3.1.0-Traditional_ML_Artifacts/ml_preprocessor.joblib`
+   - LLM Model: `3-Model_Training/3.2-LLM_Classification/3.2.0-FineTune_OpenBioLLM/OpenBioLLM_Final/`
+
+3. **Database**: `1-Data/ED_Simulated_Database_Fixed.db` (not in repo due to size)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd Capstone_Organized
+   ```
+
+2. Set up Python environment:
+   ```bash
+   cd er_triage_workflow
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. Set the base path (if different from default):
+   ```bash
+   export BASE_PATH="/path/to/Capstone_Organized"
+   ```
+
+4. Ensure model artifacts and database are in place (see structure above)
+
+### Running the Workflow
+
 ```bash
-pip install langgraph transformers peft accelerate bitsandbytes scikit-learn joblib pandas langchain-core langchain
+cd er_triage_workflow
+python -m src.main
 ```
 
-### Model Artifacts
-
-The system requires pre-trained model artifacts:
-- ML model: `gb_model.joblib`
-- ML preprocessor: `ml_preprocessor.joblib`
-- Fine-tuned LLM: `OpenBioLLM_Final/`
-- Feature columns: `ml_feature_columns.json`
-
-## Usage
-
-### Running the LangGraph Workflow
+Or use the workflow programmatically:
 
 ```python
-from langgraph.graph import StateGraph
+from er_triage_workflow.src.main import run_simulation
 
-# Initialize workflow
-inputs = {
-    "visit_id": 1,
-    "human_prompt": "Patient is 70yo, frail, and on chemotherapy."
-}
-
-config = {"configurable": {"thread_id": "sim-1"}}
-final_state = graph.invoke(inputs, config)
+result = run_simulation(
+    visit_id=1,
+    human_prompt="Patient is 70yo, frail, and on chemotherapy."
+)
+print(f"Decision: {result['decision']}")
 ```
 
-### Evaluation
+## 📝 Important Notes
 
-The system includes comprehensive evaluation notebooks that:
-- Test on held-out test sets
-- Calculate ROC-AUC scores
-- Find optimal admission thresholds
-- Generate performance reports
+### Files Not in Repository
 
-## Results
+Due to GitHub file size limits, the following are **NOT** included in the repository:
 
-- **Agent AUC**: 0.7586
-- **Optimal Threshold**: 0.3534 (Youden's J statistic)
-- **Test Set Performance**: 73% accuracy with balanced precision/recall
+- **Database files** (`.db`, `.sqlite`): Place in `1-Data/`
+- **Model files** (`.joblib`, `.pkl`, `.safetensors`, `.bin`): Place in `3-Model_Training/`
+- **Large CSV files**: Place in `1-Data/`
+- **Log files** (`.jsonl`): Generated at runtime in `4-LangGraph/4.0-LangGraph_Logs/`
 
-## Data Privacy
+### Directory Structure
 
-The system implements PII redaction for:
-- Email addresses
-- Phone numbers
-- SSNs
-- Dates
-- Age information
-- Gender-specific terms
+The code expects the following directory structure relative to `BASE_PATH`:
 
-## License
+```
+BASE_PATH/
+├── 1-Data/
+│   └── ED_Simulated_Database_Fixed.db
+├── 3-Model_Training/
+│   ├── 3.1-Traditional_ML/
+│   │   └── 3.1.0-Traditional_ML_Artifacts/
+│   │       ├── gb_model.joblib
+│   │       ├── ml_preprocessor.joblib
+│   │       └── ml_feature_columns.json
+│   └── 3.2-LLM_Classification/
+│       └── 3.2.0-FineTune_OpenBioLLM/
+│           └── OpenBioLLM_Final/
+└── 4-LangGraph/
+    └── 4.0-LangGraph_Logs/
+```
+
+## 🔧 Configuration
+
+Configuration is managed in `er_triage_workflow/config/settings.py`. You can:
+
+1. Set `BASE_PATH` environment variable
+2. Modify paths in the config file
+3. Use `Config.from_env(base_path="/your/path")` programmatically
+
+## 📚 Documentation
+
+- **Package Structure**: See `er_triage_workflow/STRUCTURE_SUMMARY.md`
+- **Conversion Guide**: See `er_triage_workflow/CONVERSION_GUIDE.md`
+- **Extraction Status**: See `er_triage_workflow/EXTRACTION_STATUS.md`
+- **Quick Start**: See `er_triage_workflow/QUICK_START.md`
+
+## 🧪 Evaluation
+
+The evaluation script is in the notebook `4-LangGraph/4.1.4-LangGraph_Agent_with_Reasoning-Optimal_Threshold_Finder.ipynb` (cells 38-48). This will be extracted to `er_triage_workflow/src/evaluation/evaluate.py` in a future update.
+
+## 📄 License
 
 [Add your license here]
 
-## Authors
+## 👥 Contributors
 
-[Add author information here]
-
-## Acknowledgments
-
-[Add acknowledgments here]
-
+[Add contributors here]

@@ -16,34 +16,15 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
-# Virtual Environments
+# Virtual environments
 venv/
 env/
 ENV/
-.venv
-
-# Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# Environment variables
-.env
-.env.local
-.env.*.local
+.venv/
 
 # IDE
 .vscode/
@@ -51,48 +32,71 @@ ipython_config.py
 *.swp
 *.swo
 *~
-.DS_Store
 
-# Model artifacts and large files
-*.joblib
-*.pkl
-*.h5
-*.hdf5
-*.ckpt
-*.pt
-*.pth
-*.safetensors
-*.dat
-*.bin
-*.safetensors.index.json
-
-# Data files (uncomment if you don't want to track data)
-# *.csv
-# *.db
-# *.sqlite
-# *.xlsx
+# Jupyter
+.ipynb_checkpoints/
+# Keep notebooks but ignore checkpoints
+!*.ipynb
 
 # Logs
 *.log
-*.log.*
-trace_log.jsonl
+logs/
+*.jsonl
 
-# Model checkpoints (uncomment if you don't want to track checkpoints)
-# OpenBioLLM_Checkpoints/
-# OpenBioLLM_Offload/
+# Data files (too large for git)
+*.db
+*.sqlite
+*.sqlite3
+# Keep CSV structure but ignore large data files
+# !tests/test_*.csv
+
+# Model files (too large for git)
+*.joblib
+*.pkl
+*.pth
+*.pt
+*.safetensors
+*.bin
+*.h5
+*.ckpt
+checkpoints/
+OpenBioLLM*/
+**/OpenBioLLM_Offload/
+**/OpenBioLLM_Final/
+**/OpenBioLLM_Checkpoints/
+
+# Large data files
+*.csv
+!tests/test_*.csv
+*.xlsx
+*.xls
+*.parquet
 
 # OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+*.swp
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # Temporary files
 *.tmp
 *.temp
 *.bak
-*.swp
+*~
 
+# Model training outputs (keep structure, ignore files)
+**/3.1.0-Traditional_ML_Artifacts/*.joblib
+**/3.1.0-Traditional_ML_Artifacts/*.pkl
+**/3.2.0-FineTune_OpenBioLLM/**/*.safetensors
+**/3.2.0-FineTune_OpenBioLLM/**/*.bin
+**/3.2.0-FineTune_OpenBioLLM/OpenBioLLM_Offload/
+**/3.2.0-FineTune_OpenBioLLM/OpenBioLLM_Checkpoints/
+
+# Keep directory structure but ignore large files
+!**/3.1.0-Traditional_ML_Artifacts/
+!**/3.2.0-FineTune_OpenBioLLM/
+!**/3.2.0-FineTune_OpenBioLLM/OpenBioLLM_Final/
