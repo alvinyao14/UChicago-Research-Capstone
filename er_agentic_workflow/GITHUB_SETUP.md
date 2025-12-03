@@ -42,16 +42,16 @@ After pushing, verify by visiting your repository on GitHub. You should see all 
 - For HTTPS: You may need to use a Personal Access Token instead of password
 - For SSH: Make sure your SSH key is added to GitHub
 
-### If you want to push only the er_triage_workflow folder:
-If you want the repository to contain only the `er_triage_workflow` folder (not the entire parent directory), you can:
+### If you want to push only the er_agentic_workflow folder:
+If you want the repository to contain only the `er_agentic_workflow` folder (not the entire parent directory), you can:
 
 1. Create a new repository
-2. Initialize git inside `er_triage_workflow`:
+2. Initialize git inside `er_agentic_workflow`:
    ```bash
-   cd "/Users/yuhsuanko/Desktop/UChicago/UChicago_Q4/Capstone II/Capstone_Organized/er_triage_workflow"
+   cd "/Users/yuhsuanko/Desktop/UChicago/UChicago_Q4/Capstone II/Capstone_Organized/er_agentic_workflow"
    git init
    git add .
-   git commit -m "Initial commit: ER Triage Workflow package"
+   git commit -m "Initial commit: ER Admission Agentic AI package"
    git remote add origin https://github.com/YOUR_USERNAME/er-admission-agentic-ai.git
    git push -u origin main
    ```
